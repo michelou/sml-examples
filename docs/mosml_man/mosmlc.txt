@@ -1,0 +1,220 @@
+MOSMLC(1)                   General Commands Manual                  MOSMLC(1)
+
+
+
+NAME
+       mosmlc - Standard ML batch compiler
+
+SYNOPSIS
+       mosmlc [OPTION]... [FILE]...
+
+DESCRIPTION
+       Invokes the Moscow ML batch compiler and linker.  The compiler compiles
+       units and links programs, and can turn them into standalone executable
+       bytecode files.
+
+       The mosmlc command has a command-line interface similar to that of most
+       C compilers.  It accepts several types of arguments: source files for
+       unit interfaces, source files for unit implementations, compiled unit
+       interfaces (which are added to the compilation context), and compiled
+       unit implementations (which are added to the linked executable).
+
+       A FILE argument ending in .sig is taken to be the name of a source file
+       containing a unit interface.  Given a file U.sig, the compiler produces
+       a compiled interface in the file U.ui.
+
+       A FILE argument ending in .sml is taken to be the name of a source file
+       containing a unit implementation.  Given a file U.sml, the compiler
+       produces compiled object code in the file U.uo. It also produces an
+       inferred interface file U.ui if there is no explicit interface U.sig.
+
+       A FILE argument ending in .ui is taken to be the name of a compilation
+       unit interface.  The contents of that compilation unit are added to the
+       compilation context of the remaining source files.
+
+       A FILE argument ending in .uo is taken to be the name of a compiled
+       unit implementation.  Such files are linked together, along with the
+       compiled unit implementations obtained by compiling .sml arguments (if
+       any), and the necessary Moscow ML library files, to produce a
+       standalone executable program.
+
+       The output of the linking phase is a file containing compiled code that
+       can be executed by the runtime system camlrunm.  If mosmlout is the
+       name of the file produced by the linking phase (with option -o
+       mosmlout), the command mosmlout arg1 ... argn executes the compiled
+       code contained in mosmlout.
+
+       Executing the code means executing the toplevel declarations of all the
+       bytecode files involved, in the order in which they were linked.  The
+       list of command-line arguments arg1 ... argn can be obtained in a
+       program by CommandLine.arguments ().
+
+       There is no distinguished function which is automatically invoked when
+       the program is executed, but it is common to define a main function and
+       invoke it using the toplevel declaration val _ = main().
+
+       This manual page documents the options accepted by mosmlc.  For more
+       information consult the online manuals.
+
+OPTIONS
+       -c     Compile only. Suppresses the linking phase of the compilation.
+              Source code files are turned into compiled files (.ui and .uo),
+              but no executable file is produced.  This option is useful for
+              compiling separate units.
+
+       -conservative
+              Sets conservative mode for compilation of subsequent units:
+              accept all extensions to the SML Modules language, but issue a
+              warning for each use. This is the default.
+
+       -files response-file
+              Pass the names of files listed in file response-file to the
+              linking phase just as if these names appeared on the command
+              line.  File names in response-file are separated by blanks
+              (spaces, tabs, newlines) and must end either in .sml or .uo. A
+              name U.sml appearing in the response file is equivalent to U.uo.
+
+       -g     This option causes some information about exception names to be
+              written at the end of the executable bytecode file.
+
+       -g     Causes the compiler to print the inferred interface(s) of the
+              unit implementation(s) being compiled.  Also causes the linker
+              to list all object files linked.  A U.sig file corresponding to
+              a given U.sml file can be produced semi-automatically by piping
+              the output of the compiler to a file U.out, and subsequently
+              editing this file to obtain a file U.sig.
+
+       -I directory
+              Add the given directory to the list of directories searched for
+              compiled interface files (.ui) and compiled implementation files
+              (.uo).  By default, the current directory is searched first,
+              then the standard library directory.  Directories added with -I
+              are searched after the current directory, but before the
+              standard library directory.  When several directories are added
+              with several -I options on the command line, these directories
+              are searched from left to right.
+
+       -imptypes
+              Specifies that the type checker should distinguish between
+              imperative and applicative type variables, generalize all
+              applicative type variables, and generalize imperative type
+              variables only in non-expansive expressions.
+
+       -liberal
+              Sets liberal mode for compilation of subsequent units: accept
+              without warnings all extensions to the SML Modules language.
+
+       -msgstyle style
+              By specifying -msgstyle msdev, one can make the compiler
+              generate error messages understandable by Microsoft Developer
+              Studio.  The default behaviour is to generate error messages
+              understandable the Emacs editor in SML mode.
+
+       -noautolink
+              The linker automatically links in any additional object files
+              required by the files explicitly specified on the command line.
+              With option -noautolink all required object files must be
+              explicitly specified in the appropriate order.
+
+       -noheader
+              Causes the output file produced by the linker to contain only
+              the bytecode, not preceded by any executable code.  A file
+              mosmlout thus obtained can be executed only by explicitly
+              invoking the runtime system as follows: camlrunm mosmlout.
+
+       -o exec-file
+              Specify the name of the output file produced by the linker.  In
+              the absence of this option, a default name, a.out is used.
+
+       -orthodox
+              Sets orthodox mode for the compilation of subsequent units:
+              reject all uses of the extensions to the SML Modules language.
+              That is, accept only SML Modules syntax.
+
+       -P unit-set
+              Determines which library units will be open at compile-time.
+              Any library unit in the load path can be used by the compiler
+              for type checking purposes.  Thus regardless of the -P option,
+              the compiler knows the type of library functions such as
+              Array.foldl.
+
+              -P default
+                     The units Char, List, and String will be partially
+                     openend. This is the default, permitting e.g.
+                     String.concat to be referred to just as concat.
+
+              -P sml90
+                     Provides an initial environment which is upwards
+                     compatible with that of the 1990 `Definition of Standard
+                     ML' and with pre-1.30 releases of Moscow ML. In
+                     particular, the functions chr, explode, implode, and ord
+                     work on strings, not characters.   The math functions and
+                     input-output facilities required by the 1990 Definition
+                     are available at top-level.  In addition the same
+                     libraries are opened as with -P default.
+
+              -P nj93
+                     Provides a top-level environment which is mostly
+                     compatible with that of SML/NJ 0.93.  The functions app,
+                     ceiling, chr, ddeecc, explode, fold, hd, implode, inc, max,
+                     min, nth, nthtail, ord, ordof, revapp, revfold,
+                     substring, tl, and truncate have the same type and
+                     meaning as in SML/NJ 0.93.  Note that this is
+                     incompatible with SML/NJ version 110. The math functions
+                     and input-output facilities required by the 1990
+                     `Definition of Standard ML' are available at top-level.
+                     In addition the same (new) libraries are opened as with
+                     -P default.  This option does not imply -imptypes.
+
+              -P full
+                     Same as -P default.
+
+              -P none
+                     No library units are initially opened.
+
+              Additional directories to be searched for library units can be
+              specified with the -I directory option.
+
+       -q     Enables the quotation/antiquotation mechanism.
+
+       -standalone
+              Specifies that the runtime system should be prepended to the
+              linked bytecode, thus creating a stand-alone executable.  This
+              adds 75--100 KB to the size of the linked file.
+
+       -stdlib stdlib-directory
+              Specifies the standard library directory, which will be searched
+              by the compiler and linker for the .ui and .uo files
+              corresponding to units mentioned in the files being linked.  The
+              default standard library is set when the system is created;
+              under Debian it is /usr/lib/mosml.
+
+       -structure
+              Specifies that subsequent .sml and .sig source files must be
+              compiled in `structure' mode.
+
+       -toplevel
+              Specifies that subsequent .sml and .sig source files must be
+              compiled in `toplevel' mode.
+
+       -v     Prints the version number of the various passes of the compiler.
+
+       -valuepoly
+              Specifies that the type checker should use `value polymorphism'.
+              Default.
+
+AUTHOR
+       Compiled by Henning Niss from the various Moscow ML documents written
+       by Sergei Romanenko, Claudio Russo, and Peter Sestoft.
+
+SEE ALSO
+       mosml(1), mosmlyac(1), mosmllex(1)
+
+       The full documentation for mosmlc and the other Moscow ML tools can be
+       found in the online manuals in /usr/share/doc/mosml/manual.pdf.gz
+       (`Moscow ML Owner's Manual') and /usr/share/doc/mosml/mosmllib.pdf.gz
+       (`Moscow ML Library Documentation').
+
+
+
+Version 2.0                    18 September 2001                     MOSMLC(1)

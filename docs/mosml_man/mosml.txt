@@ -1,0 +1,131 @@
+MOSML(1)                    General Commands Manual                   MOSML(1)
+
+
+
+NAME
+       mosml - Standard ML interpreter
+
+SYNOPSIS
+       mosml [OPTION]... [FILE]...
+
+DESCRIPTION
+       Invokes the interactive Moscow ML system. The interactive system allows
+       you to enter declarations and evaluate expressions.
+
+       You can quit the interactive session by typing quit(); or control-D.
+       Type help "lib"; for an overview of built-in function libraries, and
+       e.g. help "Array"; for help on Array operations.
+
+       Invoking the interactive system with a list of files FILEs correspond
+       to invoking it without the file list, and when the Moscow ML has
+       started entering use "file1"; ... use "filen";.
+
+       This manual page documents the options accepted by mosml.  For more
+       information consult the online manuals.
+
+OPTIONS
+       -conservative
+              Sets conservative mode for compilation of subsequent units:
+              accept all extensions to the SML Modules language, but issue a
+              warning for each use. This is the default.
+
+       -I directory
+              Specifies directories to be searched for interface files,
+              bytecode files, and source files.  A call to use, load or
+              loadOne will first search the current directory, then all
+              directories specified by option -I in order of appearance from
+              left to right, and finally the standard library directory.
+              (This option affects the variable Meta.loadPath.)
+
+       -imptypes
+              Specifies that the type checker should distinguish between
+              imperative and applicative type variables, generalize all
+              applicative type variables, and generalize imperative type
+              variables only in non-expansive expressions.
+
+       -liberal
+              Sets liberal mode for compilation of subsequent units: accept
+              without warnings all extensions to the SML Modules language.
+
+       -orthodox
+              Sets orthodox mode for the compilation of subsequent units:
+              reject all uses of the extensions to the SML Modules language.
+              That is, accept only SML Modules syntax.
+
+       -P unit-set
+              Determines which library units will be included and open at
+              compile-time.  Any library unit in the load path can be used by
+              the compile function for type checking purposes.  Thus
+              regardless -P option, the compile function knows the type of
+              library functions such as Array.foldl.
+
+              -P default
+                     The initial environment for the SML Basis Library:
+                     modules Array, Char, List, String, and Vector will be
+                     loaded, and Char, List, and String will be partially
+                     opened.
+
+              -P sml90
+                     This provides an initial environment which is upwards
+                     compatible with that of the 1990 `Definition of Standard
+                     ML' and with pre-1.30 releases of Moscow ML. In
+                     particular, the functions chr, explode, implode, and oorrdd
+                     work on strings, not characters.  The new versions of
+                     these functions are still available as Char.chr,
+                     Char.ord, String.explode, and String.implode.  The math
+                     functions and input-output facilities required by the
+                     1990 Definition are available at top-level.  In addition
+                     the same libraries are loaded as with -P default.
+
+              -P nj93
+                     This provides a top-level environment which is mostly
+                     compatible with that of SML/NJ 0.93.  The functions app,
+                     ceiling, chr, dec, explode, fold, hd, implode, inc, max,
+                     min, nth, nthtail, ord, ordof, revapp, revfold,
+                     substring, tl, and truncate have the same type and
+                     meaning as in SML/NJ 0.93.  Note that this is
+                     incompatible with SML/NJ version 110. The math functions
+                     and input-output facilities required by the 1990
+                     `Definition of Standard ML' are available at top-level.
+                     In addition the same (new) libraries are loaded as with
+                     -P default.  This option does not imply -imptypes.
+
+              -P full
+                     This loads all the libraries marked F in the library list
+                     (see the online manuals), and partially opens the Char,
+                     List, and String units.
+
+              -P none
+                     No library units are loaded or opened initially.
+
+              Additional library units can loaded into the interactive system
+              by using the load function.
+
+       -quietdec
+              Turns off the interactive system's prompt and responses, except
+              for warnings and error messages.  Useful for writing scripts in
+              SML.  Sets Meta.quietdec to true.
+
+       -stdlib stdlib-directory
+              Specify the standard library directory to be stdlib-directory.
+              The default standard library is /usr/lib/mosml under Debian.
+
+       -valuepoly
+              Specifies that the type checker should use `value polymorphism'.
+              Default.
+
+AUTHOR
+       Compiled by Henning Niss from the various Moscow ML documents written
+       by Sergei Romanenko, Claudio Russo, and Peter Sestoft.
+
+SEE ALSO
+       mosmlc(1), mosmlyac(1), mosmllex(1)
+
+       The full documentation for mosml and the other Moscow ML tools can be
+       found in the online manuals in /usr/share/doc/mosml/manual.pdf.gz
+       (`Moscow ML Owner's Manual') and /usr/share/doc/mosml/mosmllib.pdf.gz
+       (`Moscow ML Library Documentation').
+
+
+
+Version 2.0                    18 September 2001                      MOSML(1)
