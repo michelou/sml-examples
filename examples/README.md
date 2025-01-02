@@ -4,18 +4,18 @@
   <tr>
   <td style="border:0;padding:0 10px 0 0;min-width:120px;"><a href="https://smlfamily.github.io/" rel="external"><img src="../docs/images/sml.png"" width="120" alt="SML project"/></a></td>
   <td style="border:0;padding:0;vertical-align:text-top;">This repository gathers <a href="https://smlfamily.github.io/" rel="external">Standard ML</a> code examples from various websites.<br/>
-  It also includes several build scripts (<a href="https://en.wikibooks.org/wiki/Windows_Batch_Scripting">batch files</a>) for experimenting with <a href="https://smlfamily.github.io/" rel="external">Standard ML</a> on a Windows machine.
+  It also includes several build scripts (<a href="https://en.wikibooks.org/wiki/Windows_Batch_Scripting">batch files</a>, <a href="https://makefiletutorial.com/" rel="external">Make scripts</a>) for experimenting with <a href="https://smlfamily.github.io/" rel="external">Standard ML</a> on a Windows machine.
   </td>
   </tr>
 </table>
 
-We support two ways to execute Standard ML code, either as a script or as a module.
+Standard ML code can be executed either as a script or as a module.
 
 | SML      | SML/NJ&nbsp;commands | Moscow&nbsp;ML&nbsp;commands |
 |:--------:|:---------------------|:-----------------------------|
 | script   | [`sml`][sml_cmd] &lt;script-file&gt; | [`mosml`][mosml_cmd] &lt;script-file&gt; |
 | module <sup><b>a)</b></sup><br/>&nbsp;<br/>&nbsp; | [`ml-build`][ml-build_cmd] &lt;cm-file&gt;<sup><b>b)</b></sup><br/>&emsp;&emsp;&emsp;&emsp;&emsp;&lt;module-main&gt;<br/>&emsp;&emsp;&emsp;&emsp;&emsp;&lt;image-name&gt; | [`mosmlc`][mosmlc_cmd] &lt;source-file&gt;<br/>&emsp;<br/> &emsp; |
-<div style="margin:0 0 10px 10px;font-size:80%;">
+<div style="margin:0 0 20px 10px;font-size:80%;">
 <sup><b>a)</b></sup> An <a href="https://smlhelp.github.io/book/docs/concepts/modules/">SML module</a> consists of a signature and its implementation.</br>
 <sup><b>b)</b></sup> <a href="https://www.smlnj.org/doc/CM/">Compilation manager</a> file (similar in the spirit to a Makefile).
 </div>

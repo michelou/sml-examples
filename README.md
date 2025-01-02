@@ -89,9 +89,10 @@ We distinguish different sets of batch commands:
    <pre style="font-size:80%;">
    <b>&gt; <a href="./setenv.bat">setenv</a> -verbose</b>
    Tool versions:
-      mosmlc 2.01, sml 110.99.6.1,
+      MLton 20241230, mosmlc 2.01, sml 110.99.6.1,
       git 2.47.1, diff 3.10, bash 5.2.37(1)
    Tool paths:
+      C:\opt\mlton\bin\mlton.bat
       C:\opt\mosml\bin\mosmlc.exe
       C:\opt\SMLNJ\bin\sml.bat
       C:\opt\Git\bin\git.exe
@@ -99,6 +100,7 @@ We distinguish different sets of batch commands:
       C:\opt\Git\bin\bash.exe
    Environment variables:
       "GIT_HOME=C:\opt\Git"
+      "MLTON_HOME=C:\opt\mlton"
       "MOSML_HOME=C:\opt\mosml"
       "MOSMLLIB=C:\opt\mosml\lib"
       "SMLNJ_HOME=C:\opt\smlnj"
@@ -118,11 +120,12 @@ In our case we downloaded the following installation files (see <a href="#proj_d
 </dd>
 <dd>
 <pre style="font-size:80%;">
-<a href="https://git-scm.com/download/win" rel="external">PortableGit-2.47.1-64-bit.7z.exe</a>         <i>( 43 MB)</i>
-<a href="https://www.cl.cam.ac.uk/research/tsg/SMLNET/download.html">smlnet.tar.gz</a>                               <i>( MB)</i>
-<a href="https://smlnj.org/dist/working/110.99.6.1/windows.html">smlnj-110.99.6.1.msi</a>                     <i>( 13 MB)</i>
-<a href="https://code.visualstudio.com/Download#" rel="external">VSCode-win32-x64-1.96.2.zip</a>              <i>(131 MB)</i>
-<a href="https://www.itu.dk/~sestoft/mosml.html" rel="external">win32-mos201bin.zip</a>                      <i>(  2 MB)</i>
+<a href="">mlton-20241230-1.amd64-mingw.windows-2022_MINGW64.tgz</a> <i>( 16 MB)</i>
+<a href="https://git-scm.com/download/win" rel="external">PortableGit-2.47.1-64-bit.7z.exe</a>                      <i>( 43 MB)</i>
+<a href="https://www.cl.cam.ac.uk/research/tsg/SMLNET/download.html">smlnet.tar.gz</a>                                         <i>(  3 MB)</i>
+<a href="https://smlnj.org/dist/working/110.99.6.1/windows.html">smlnj-110.99.6.1.msi</a>                                  <i>( 13 MB)</i>
+<a href="https://code.visualstudio.com/Download#" rel="external">VSCode-win32-x64-1.96.2.zip</a>                           <i>(131 MB)</i>
+<a href="https://www.itu.dk/~sestoft/mosml.html" rel="external">win32-mos201bin.zip</a>                                   <i>(  2 MB)</i>
 </pre>
 </dd></dl>
 
@@ -168,6 +171,7 @@ Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
 [graalvm_examples]: https://github.com/michelou/graalvm-examples#top
 [kafka_examples]: https://github.com/michelou/kafka-examples#top
 [kotlin_examples]: https://github.com/michelou/kotlin-examples#top
+[linux_opt]: https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/opt.html
 [llvm_examples]: https://github.com/michelou/llvm-examples#top
 [m2_examples]: https://github.com/michelou/m2-examples#top
 [man1_awk]: https://www.linux.org/docs/man1/awk.html
