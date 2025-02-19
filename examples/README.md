@@ -4,7 +4,7 @@
   <tr>
   <td style="border:0;padding:0 10px 0 0;min-width:120px;"><a href="https://smlfamily.github.io/" rel="external"><img src="../docs/images/sml.png"" width="120" alt="SML project"/></a></td>
   <td style="border:0;padding:0;vertical-align:text-top;">This repository gathers <a href="https://smlfamily.github.io/" rel="external">Standard ML</a> code examples from various websites.<br/>
-  It also includes several build scripts (<a href="https://en.wikibooks.org/wiki/Windows_Batch_Scripting">batch files</a>, <a href="https://makefiletutorial.com/" rel="external">Make scripts</a>) for experimenting with <a href="https://smlfamily.github.io/" rel="external">Standard ML</a> on a Windows machine.
+  It also includes several build scripts (<a href="https://www.gnu.org/software/bash/manual/bash.html" rel="external">Bash scripts</a>, <a href="https://en.wikibooks.org/wiki/Windows_Batch_Scripting">batch files</a>, <a href="https://makefiletutorial.com/" rel="external">Make scripts</a>) for experimenting with <a href="https://smlfamily.github.io/" rel="external">Standard ML</a> on a Windows machine.
   </td>
   </tr>
 </table>
@@ -24,7 +24,7 @@ Futhermore there are also two ways to execute each of the following code example
 - either ***interactively*** by running the REPL and writing `use "src/hello.sml"` (below the '`-`' character is the [SML prompt][sml_prompt]) :
   <pre style="font-size:80%;">
   <b>&gt; %SMLNJ_HOME%\bin\<a href="https://manpages.ubuntu.com/manpages/noble/man1/sml.1.html">sml.bat</a></b>
-  Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
+  Standard ML of New Jersey [Version 110.99.7.1; 32-bit; January 17, 2025]
   - use "src/hello.sml";
   [opening src/hello.sml]
   [autoloading]
@@ -46,7 +46,7 @@ Futhermore there are also two ways to execute each of the following code example
     <pre style="font-size:80%;">
     <b>&gt; <a href="./hello/build.bat">build</a> -verbose clean run</b>
     Execute SML script "target\hello-sml"
-    Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
+    Standard ML of New Jersey [Version 110.99.7.1; 32-bit; January 17, 2025]
     [opening K:\examples\hello\target\hello.sml]
     [autoloading]
     [library $SMLNJ-BASIS/basis.cm is stable]
@@ -94,7 +94,7 @@ We execute the *slightly modified* SML script file `target\args.sml` as follows 
 <pre style="font-size:80%;">
 <b>&gt; <a href="./args/build.bat">build</a> -verbose clean run</b>
 Execute SML script "args"
-Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
+Standard ML of New Jersey [Version 110.99.7.1; 32-bit; January 17, 2025]
 [opening K:\examples\args\target\args.sml]
 [autoloading]
 [library $SMLNJ-BASIS/basis.cm is stable]
@@ -110,7 +110,7 @@ We add `compile` to the above command in order to generate and execute the SML i
 <pre style="font-size:80%;">
 <b>&gt; <a href="./args/build.bat">build</a> -verbose clean compile run</b>
 Compile SML source file "args"
-Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
+Standard ML of New Jersey [Version 110.99.7.1; 32-bit; January 17, 2025]
 [scanning ../build.cm]
 [parsing ../(build.cm):src/args.sml]
 [creating directory ..\src\.cm\SKEL]
@@ -156,7 +156,7 @@ We execute the *slightly modified* SML script file [`tatget\hello.sml`] :
 <pre style="font-size:80%;">
 <b>&gt; <a href="./hello/build.bat">build</a> -verbose clean run</b>
 Execute SML script "hello"
-Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
+Standard ML of New Jersey [Version 110.99.7.1; 32-bit; January 17, 2025]
 [opening K:\examples\hello\target\hello.sml]
 [autoloading]
 [library $SMLNJ-BASIS/basis.cm is stable]
@@ -170,7 +170,7 @@ We add `compile` to the above command in order to generate and execute the SML i
 <pre style="font-size:80%;">
 <b>&gt; <a href="./hello/build.bat">build</a> -verbose clean compile run</b>
 Compile SML source file "hello"
-Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
+Standard ML of New Jersey [Version 110.99.7.1; 32-bit; January 17, 2025]
 [scanning ../build.cm]
 [parsing ../(build.cm):src/hello.sml]
 [creating directory ..\src\.cm\SKEL]
@@ -203,7 +203,7 @@ We execute the SML script file `target\main.sml` as follows :
 <pre style="font-size:80%;">
 <b>&gt; <a href="./norm/build.bat">build</a> -verbose clean run</b>
 Execute SML script "main"
-Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
+Standard ML of New Jersey [Version 110.99.7.1; 32-bit; January 17, 2025]
 [opening K:\examples\norm\target\main.sml]
 [opening src/script/helper.sml]
 [autoloading]
@@ -245,7 +245,7 @@ We execute the *slightly modified* SML script file `target\qsort.sml` as follows
   <pre style="font-size:80%;">
   <b>&gt; <a href="./qsort/build.bat">build</a> -verbose clean run</b>
   Execute SML script "target\qsort.sml"
-  Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
+  Standard ML of New Jersey [Version 110.99.7.1; 32-bit; January 17, 2025]
   [opening K:\examples\qsort\target\qsort.sml]
   [autoloading]
   [library $smlnj/compiler/current.cm is stable]
@@ -297,7 +297,7 @@ We execute the *slightly modified* SML script file `target\polysort.sml` as foll
   <pre style="font-size:80%;">
   <b>&gt; <a href="./polysort/build.bat">build</a> -verbose clean run</b>
   Execute SML script "target\polysort.sml"
-  Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
+  Standard ML of New Jersey [Version 110.99.7.1; 32-bit; January 17, 2025]
   [opening K:\examples\polysort\target\polysort.sml]
   [autoloading]
   [library $smlnj/compiler/current.cm is stable]
@@ -365,7 +365,7 @@ We execute the *slightly modified* SML script file `target\sumpairs.sml` as foll
   <pre style="font-size:80%;">
   <b>&gt; <a href="./sumpairs/build.bat">build</a> -verbose clean run</b>
   Execute SML script "sumpairs"
-  Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
+  Standard ML of New Jersey [Version 110.99.7.1; 32-bit; January 17, 2025]
   [opening K:\examples\sumpairs\target\sumpairs.sml]
   [autoloading]
   [library $SMLNJ-BASIS/basis.cm is stable]
@@ -398,7 +398,7 @@ We add `compile` to the above command in order to generate and execute the SML i
 <pre style="font-size:80%;">
 <b>&gt; <a href="./sumpairs/build.bat">build</a> -verbose clean compile run</b>
 Compile SML source file "sumpairs"
-Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
+Standard ML of New Jersey [Version 110.99.7.1; 32-bit; January 17, 2025]
 [scanning ../build.cm]
 [parsing ../(build.cm):src/sumpairs.sml]
 [creating directory ..\src\.cm\SKEL]
@@ -414,7 +414,7 @@ sumpairs=3,7
 
 ***
 
-*[mics](https://lampwww.epfl.ch/~michelou/)/January 2025* [**&#9650;**](#top)
+*[mics](https://lampwww.epfl.ch/~michelou/)/February 2025* [**&#9650;**](#top)
 <span id="bottom">&nbsp;</span>
 
 <!-- link refs -->

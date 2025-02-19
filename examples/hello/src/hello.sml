@@ -1,8 +1,8 @@
-structure MainModule =
-struct
-
 fun hello () =
     print "Hello World\n"
+
+structure MainModule =
+struct
 
 fun main args = (
     hello ();

@@ -165,7 +165,7 @@ if "%__ARG:~0,1%"=="-" (
     if "%__ARG%"=="clean" ( set _CLEAN=1
     ) else if "%__ARG%"=="compile" ( set _COMPILE=1
     ) else if "%__ARG%"=="help" ( set _HELP=1
-    ) else if "%__ARG%"=="run" ( set _RUN=1
+    ) else if "%__ARG%"=="run" ( set _COMPILE=1& set _RUN=1
     ) else (
         echo %_ERROR_LABEL% Unknown subcommand "%__ARG%" 1>&2
         set _EXITCODE=1
@@ -189,7 +189,7 @@ if %_TOOLSET%==mosml if not defined _MOSMLC_CMD (
 )
 for /f "delims=" %%i in ("%~dp0.") do set "_PROJ_NAME=%%~ni"
 set _MAIN_NAME=%_PROJ_NAME%
-set _MAIN_ARGS=1 a
+set _MAIN_ARGS=
 
 set _IMAGE_MAIN=MainModule.main
 set _IMAGE_NAME=%_PROJ_NAME%-image
@@ -200,6 +200,7 @@ set "_EXEC_FILE=%_TARGET_DIR%\%_PROJ_NAME%.exe"
 if %_DEBUG%==1 (
     echo %_DEBUG_LABEL% Options    : _DEBUG=%_DEBUG% _TOOLSET=%_TOOLSET% _VERBOSE=%_VERBOSE% 1>&2
     echo %_DEBUG_LABEL% Subcommands: _CLEAN=%_CLEAN% _COMPILE=%_COMPILE% _RUN=%_RUN% 1>&2
+    if defined MLTON_HOME echo %_DEBUG_LABEL% Variables  : "MLTON_HOME=%MLTON_HOME%" 1>&2
     echo %_DEBUG_LABEL% Variables  : "SMLNJ_HOME=%SMLNJ_HOME%" 1>&2
     if defined MOSML_HOME echo %_DEBUG_LABEL% Variables  : "MOSML_HOME=%MOSML_HOME%" 1>&2
     echo %_DEBUG_LABEL% Variables  : _PROJ_NAME=%_PROJ_NAME% _MAIN_NAME=%_MAIN_NAME% 1>&2
@@ -257,6 +258,9 @@ goto :eof
 :compile_mlton
 if not exist "%_TARGET_DIR%" mkdir "%_TARGET_DIR%"
 
+call :action_required "%_TARGET_DIR%\%_MAIN_NAME%.exe" "%_SOURCE_DIR%\*.sml"
+if %_ACTION_REQUIRED%==0 goto :eof
+
 set __MLTON_OPTS=-output "%_EXEC_FILE%"
 if %_DEBUG%==1 ( set __MLTON_OPTS=-verbose 2 %__MLTON_OPTS%
 ) else if %_VERBOSE%==1 ( set __MLTON_OPTS=-verbose 1 %___MLTON_OPTS%
@@ -265,7 +269,6 @@ if %_DEBUG%==1 ( echo %_DEBUG_LABEL% "%_MLTON_CMD%" %__MLTON_OPTS% "%_SOURCE_DIR
 ) else if %_VERBOSE%==1 ( echo Compile source file "!_SOURCE_DIR:%_ROOT_DIR%=!\%_MAIN_NAME%.sml" 1>&2
 )
 call "%_MLTON_CMD%" %__MLTON_OPTS% "%_SOURCE_DIR%\%_MAIN_NAME%.sml"
-echo 11111111111111 ERRORLEVEL=%ERRORLEVEL%
 if not %ERRORLEVEL%==0 (
     echo %_ERROR_LABEL% Failed to compile source file "!_SOURCE_DIR:%_ROOT_DIR%=!\%_MAIN_NAME%.sml" 1>&2
     set _EXITCODE=1

@@ -215,11 +215,13 @@ cygwin=0
 mingw=0
 msys=0
 darwin=0
+linux=0
 case "$(uname -s)" in
     CYGWIN*) cygwin=1 ;;
     MINGW*)  mingw=1 ;;
     MSYS*)   msys=1 ;;
-    Darwin*) darwin=1
+    Darwin*) darwin=1 ;;
+    Linux*)  linux=1
 esac
 unset CYGPATH_CMD
 PSEP=":"

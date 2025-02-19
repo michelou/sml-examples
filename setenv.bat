@@ -25,7 +25,12 @@ if %_HELP%==1 (
 
 set _GIT_PATH=
 
+call :mlton
+@rem optional
+@rem if not %_EXITCODE%==0 goto end
+
 call :mosml
+@rem optional
 @rem if not %_EXITCODE%==0 goto end
 
 call :smlnj
@@ -234,6 +239,40 @@ echo   %__BEG_P%Subcommands:%__END%
 echo     %__BEG_O%help%__END%        print this help message
 goto :eof
 
+@rem output parameter: MLTON_HOME
+:mlton
+set _MLTON_HOME=
+
+set __MLTON_CMD=
+for /f "delims=" %%f in ('where mlton.bat 2^>NUL') do set "__MLTON_CMD=%%f"
+if defined __MLTON_CMD (
+    for /f "delims=" %%i in ("%__MLTON_CMD%") do set "__MLTON_BIN_DIR=%%~dpi"
+    for /f "delims=" %%f in ("!__MLTON_BIN_DIR!\.") do set "_MLTON_HOME=%%~dpf"
+    if %_DEBUG%==1 echo %_DEBUG_LABEL% Using path of MLton executable found in PATH 1>&2
+) else if defined MLTON_HOME (
+    set "_MLTON_HOME=%MLTON_HOME%"
+    if %_DEBUG%==1 echo %_DEBUG_LABEL% Using environment variable MLTON_HOME 1>&2
+) else (
+    set __PATH=C:\opt
+    if exist "!__PATH!\mlton\" ( set "_MLTON_HOME=!__PATH!\mlton"
+    ) else (
+        for /f "delims=" %%f in ('dir /ad /b "!__PATH!\mlton*" 2^>NUL') do set "_MLTON_HOME=!__PATH!\%%f"
+        if not defined _MLTON_HOME (
+            set "__PATH=%ProgramFiles%"
+            for /f "delims=" %%f in ('dir /ad /b "!__PATH!\mlton*" 2^>NUL') do set "_MLTON_HOME=!__PATH!\%%f"
+        )
+    )
+    if defined _MLTON_HOME (
+        if %_DEBUG%==1 echo %_DEBUG_LABEL% Using default MLton installation directory "!_MLTON_HOME!" 1>&2
+    )
+)
+if not exist "%_MLTON_HOME%\bin\mlton.bat" (
+    echo %_ERROR_LABEL% MLton executable not found ^("%_MLTON_HOME%"^) 1>&2
+    set _EXITCODE=1
+    goto :eof
+)
+goto :eof
+
 @rem output parameter: _MOSML_HOME
 :mosml
 set _MOSML_HOME=
@@ -344,6 +383,13 @@ set "__VERSIONS_LINE1=  "
 set "__VERSIONS_LINE2=  "
 set __WHERE_ARGS=
 
+where /q "%MLTON_HOME%\bin:mlton.bat"
+if %ERRORLEVEL%==0 (
+    for /f "tokens=*" %%i in ('"%MLTON_HOME%\bin\mlton.bat"') do (
+        set "__VERSIONS_LINE1=%__VERSIONS_LINE1% %%i,"
+    )
+    set __WHERE_ARGS=%__WHERE_ARGS% "%MLTON_HOME%\bin:mlton.bat"
+)
 where /q "%MOSML_HOME%\bin:mosmlc.exe"
 if %ERRORLEVEL%==0 (
     for /f "tokens=1-9,10,*" %%i in ('"%MOSML_HOME%\bin\mosmlc.exe" -v 2^>^&1 ^| findstr system ^| findstr /v Caml') do (
@@ -394,6 +440,7 @@ if %__VERBOSE%==1 if defined __WHERE_ARGS (
     )
     echo Environment variables: 1>&2
     if defined GIT_HOME echo    "GIT_HOME=%GIT_HOME%" 1>&2
+    if defined MLTON_HOME echo    "MLTON_HOME=%MLTON_HOME%" 1>&2
     if defined MOSML_HOME echo    "MOSML_HOME=%MOSML_HOME%" 1>&2
     if defined MOSML_HOME echo    "MOSMLLIB=%MOSML_HOME%\lib" 1>&2
     if defined SMLNJ_HOME echo    "SMLNJ_HOME=%SMLNJ_HOME%" 1>&2
@@ -413,6 +460,7 @@ goto :eof
 endlocal & (
     if %_EXITCODE%==0 (
         if not defined GIT_HOME set "GIT_HOME=%_GIT_HOME%"
+        if not defined MLTON_HOME set "MLTON_HOME=%_MLTON_HOME%"
         if not defined MOSML_HOME set "MOSML_HOME=%_MOSML_HOME%"
         if not defined MOSMLLIB set "MOSMLLIB=%_MOSML_HOME%\lib"
         if not defined SMLNJ_HOME set "SMLNJ_HOME=%_SMLNJ_HOME%"

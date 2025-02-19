@@ -7,7 +7,7 @@
   </td>
   <td style="border:0;padding:0;vertical-align:text-top;">
     This repository gathers <a href="https://smlfamily.github.io/" rel="external">Standard ML</a> examples coming from various websites and books.<br/>
-    It also includes several build scripts (<a href="https://en.wikibooks.org/wiki/Windows_Batch_Scripting" rel="external">batch files</a>, <a href="https://makefiletutorial.com/" rel="external">Make scripts</a>) for experimenting with <a href="https://smlfamily.github.io/" rel="external">Standard ML</a> on a Windows machine.
+    It also includes several build scripts (<a href="https://www.gnu.org/software/bash/manual/bash.html" rel="external">Bash scripts</a>, <a href="https://en.wikibooks.org/wiki/Windows_Batch_Scripting" rel="external">batch files</a>, <a href="https://makefiletutorial.com/" rel="external">Make scripts</a>) for experimenting with <a href="https://smlfamily.github.io/" rel="external">Standard ML</a> on a Windows machine.
   </td>
   </tr>
 </table>
@@ -18,7 +18,7 @@
 
 This project depends on the following external software for the **Microsoft Windows** platform:
 
-- [Git 2.47][git_downloads] ([*release notes*][git_relnotes])
+- [Git 2.48][git_downloads] ([*release notes*][git_relnotes])
 - [Moscow ML 2.0][mosml_downloads]
 - [SML/NJ 110][smlnj_downloads] ([*release notes*][smlnj_relnotes])
 
@@ -26,9 +26,9 @@ Optionally one may also install the following software:
 
 - [MLton 2024][mlton_downloads] ([*release notes*][mlton_relnotes])
 - [SML.NET 1.2][smlnet_downloads]
-- [Visual Studio Code 1.96][vscode_downloads] ([*release notes*][vscode_relnotes])
+- [Visual Studio Code 1.97][vscode_downloads] ([*release notes*][vscode_relnotes])
 
-For instance our development environment looks as follows (*January 2025*) <sup id="anchor_01">[1](#footnote_01)</sup>:
+For instance our development environment looks as follows (*February 2025*) <sup id="anchor_01">[1](#footnote_01)</sup>:
 
 <pre style="font-size:80%;">
 C:\opt\ConEmu\                   <i>( 26 MB)</i>
@@ -89,8 +89,8 @@ We distinguish different sets of batch commands:
    <pre style="font-size:80%;">
    <b>&gt; <a href="./setenv.bat">setenv</a> -verbose</b>
    Tool versions:
-      MLton 20241230, mosmlc 2.01, sml 110.99.6.1,
-      git 2.47.1, diff 3.10, bash 5.2.37(1)
+      MLton 20241230, mosmlc 2.01, sml 110.99.7.1,
+      git 2.48.1, diff 3.10, bash 5.2.37(1)
    Tool paths:
       C:\opt\mlton\bin\mlton.bat
       C:\opt\mosml\bin\mosmlc.exe
@@ -121,10 +121,10 @@ In our case we downloaded the following installation files (see <a href="#proj_d
 <dd>
 <pre style="font-size:80%;">
 <a href="">mlton-20241230-1.amd64-mingw.windows-2022_MINGW64.tgz</a> <i>( 16 MB)</i>
-<a href="https://git-scm.com/download/win" rel="external">PortableGit-2.47.1-64-bit.7z.exe</a>                      <i>( 43 MB)</i>
+<a href="https://git-scm.com/download/win" rel="external">PortableGit-2.48.1-64-bit.7z.exe</a>                      <i>( 43 MB)</i>
 <a href="https://www.cl.cam.ac.uk/research/tsg/SMLNET/download.html">smlnet.tar.gz</a>                                         <i>(  3 MB)</i>
-<a href="https://smlnj.org/dist/working/110.99.6.1/windows.html">smlnj-110.99.6.1.msi</a>                                  <i>( 13 MB)</i>
-<a href="https://code.visualstudio.com/Download#" rel="external">VSCode-win32-x64-1.96.2.zip</a>                           <i>(131 MB)</i>
+<a href="https://smlnj.org/dist/working/110.99.7.1/windows.html">smlnj-110.99.7.1.msi</a>                                  <i>( 13 MB)</i>
+<a href="https://code.visualstudio.com/Download#" rel="external">VSCode-win32-x64-1.97.2.zip</a>                           <i>(131 MB)</i>
 <a href="https://www.itu.dk/~sestoft/mosml.html" rel="external">win32-mos201bin.zip</a>                                   <i>(  2 MB)</i>
 </pre>
 </dd></dl>
@@ -132,21 +132,21 @@ In our case we downloaded the following installation files (see <a href="#proj_d
 <span id="footnote_02">[2]</span> ***SML/NJ Installation*** [↩](#anchor_02)
 
 <dl><dd>
-The Microsoft Installer package <a href="https://smlnj.org/dist/working/110.99.6.1/windows.html"><code>smlnj-110.99.6.1.msi</code></a> is the standard way to install SML/NJ under Windows. In addition to creating the installation directory it will update the  <code>PATH</code> environment variable and add the <code>SMLNJ_HOME</code> variable.
+The Microsoft Installer package <a href="https://smlnj.org/dist/working/110.99.7.1/index.html" rel="external"><code>smlnj-110.99.7.1.msi</code></a> is the standard way to install SML/NJ under Windows. In addition to creating the installation directory it will update the  <code>PATH</code> environment variable and add the <code>SMLNJ_HOME</code> variable.
 
 In this project we want to keep control of our environment and we just extract the installation directory <code>SMLNJ</code> from the installer (we define <code>SMLNJ_HOME</code> as a session variable) :
 
 <pre style="font-size:80%;">
-<b>&gt; <a href="https://learn.microsoft.com/en-us/windows/win32/msi/command-line-options" rel="external">msiexec</a> /a smlnj-110.99.6.1.msi /qb TARGETDIR=%USERPROFILE%\Downloads\smlnj</b>
+<b>&gt; <a href="https://learn.microsoft.com/en-us/windows/win32/msi/command-line-options" rel="external">msiexec</a> /a smlnj-110.99.7.1.msi /qb TARGETDIR=%USERPROFILE%\Downloads\smlnj</b>
 <b>&gt; <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/xcopy" rel="external">xcopy</a> /e /i %USERPROFILE%\Downloads\smlnj\pfiles\SMLNJ C:\opt\SMLNJ</b>
 <b>&gt; c:\opt\SMLNJ\bin\sml -h | <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/findstr" rel="external">findstr</a> Version</b>
-Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
+Standard ML of New Jersey [Version 110.99.7.1; 32-bit; January 17, 2025]
 </pre>
 </dd></dl>
 
 ***
 
-*[mics](https://lampwww.epfl.ch/~michelou/)/January 2025* [**&#9650;**](#top)
+*[mics](https://lampwww.epfl.ch/~michelou/)/February 2025* [**&#9650;**](#top)
 <span id="bottom">&nbsp;</span>
 
 <!-- link refs -->
@@ -165,7 +165,7 @@ Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
 [flix_examples]: https://github.com/michelou/flix-examples#top
 [git_cli]: https://git-scm.com/docs/git
 [git_downloads]: https://git-scm.com/download/win
-[git_relnotes]: https://raw.githubusercontent.com/git/git/master/Documentation/RelNotes/2.47.1.txt
+[git_relnotes]: https://github.com/git/git/blob/v2.48.1/Documentation/RelNotes/2.48.1.txt
 [github_markdown]: https://github.github.com/gfm/
 [golang_examples]: https://github.com/michelou/golang-examples#top
 [graalvm_examples]: https://github.com/michelou/graalvm-examples#top
@@ -192,8 +192,8 @@ Standard ML of New Jersey [Version 110.99.6.1; 32-bit; October 25, 2024]
 [sh_cli]: https://man7.org/linux/man-pages/man1/sh.1p.html
 [sml]: https://www.smlnj.org/
 [smlnet_downloads]: https://www.cl.cam.ac.uk/research/tsg/SMLNET/download.html
-[smlnj_downloads]: https://www.smlnj.org/
-[smlnj_relnotes]: https://www.smlnj.org/dist/working/110.99.6.1/110.99.6.1-README.html
+[smlnj_downloads]: https://www.smlnj.org/dist/working/
+[smlnj_relnotes]: https://www.smlnj.org/dist/working/110.99.7.1/110.99.7.1-README.html
 [spring_examples]: https://github.com/michelou/spring-examples#top
 [spark_examples]: https://github.com/michelou/spark-examples#top
 [trufflesqueak_examples]: https://github.com/michelou/trufflesqueak-examples#top

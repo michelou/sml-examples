@@ -63,4 +63,4 @@ help:
 .PHONY: all build clean doc help run
 
 .SUFFIXES:
-.SUFFIXES: .sml .exe
+.SUFFIXES: .dll .sml .exe
