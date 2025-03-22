@@ -11,6 +11,9 @@
 ## <span id="blogs">Blogs</span>
 
 - [My recreational programming in 2024: Mostly Standard ML](https://pzel.name/2024/12/15/2024-in-review.html) by Simon Zelazny, December 2024.
+- [A Comparison of Haskell and Standard ML](https://sergix.dev/blog/haskell-ml/) by Peyton McGinnis, December 2023.
+- [What was wrong with SML?](https://blog.plover.com/prog/haskell/sml-defects.html)
+ by Mark Dominus, April 2022.
 - [SML for Haskellers](https://jozefg.bitbucket.io/posts/2015-04-24-sml-for-haskellers.html), April 2015.
 - [Messing with Standard ML and Moscow ML](https://keith.gaughan.ie/mosml-pt1.html) by Keith Gaughan, 2008.
 
@@ -53,7 +56,7 @@
 
 ***
 
-*[mics](https://lampwww.epfl.ch/~michelou/)/February 2025* [**&#9650;**](#top)
+*[mics](https://lampwww.epfl.ch/~michelou/)/March 2025* [**&#9650;**](#top)
 <span id="bottom">&nbsp;</span>
 
 <!-- link refs -->
